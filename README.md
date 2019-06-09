@@ -14,7 +14,7 @@ Shortlisted candidates will be invited for an interview where the existing commi
 Admin Side:
 Create a dashboard where CYF admin will be able to review all applications by CYF city. There should be a sequence of stages in which the volunteers will be able to see where each person stands. Ideally the dashboard is very visual and easy to get the details of every person once you get into each one of them
 
-[ScreenShot](images/dashBoard.png)
+![ScreenShot](images/dashBoard.png)
 
 Step 2 of the process
 
