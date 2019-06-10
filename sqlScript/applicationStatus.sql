@@ -1,6 +1,6 @@
 CREATE TABLE applicationStatus (
     id 		SERIAL PRIMARY KEY,
-    userID INTEGER NOT NULL,
+    volunteerID INTEGER NOT NULL,
     status VARCHAR(20) NOT NULL,
     submissionDate DATETIME,
     comments VARCHAR(100),
