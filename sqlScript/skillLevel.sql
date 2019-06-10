@@ -1,11 +1,12 @@
 CREATE TABLE skillLevel (
-    id 		SERIAL PRIMARY KEY,
-    userID INTEGER NOT NULL,
-    htmlCss INTEGER,
-    javaScript INTEGER,
-    react INTEGER,
-    nodeSql INTEGER,
-    agileMethodology INTEGER,
-    otherExpertise VARCHAR(300),
-  CONSTRAINT  user_skill_fk FOREIGN KEY (userID) REFERENCES users(id)
+    volunteerID INTEGER NOT NULL,
+    skillID INTEGER,
+    skillLevel INTEGER,
+    CONSTRAINT PRIMARY KEY (volunteerID, skillID) --makes this column the primary key
+  CONSTRAINT  volunteer_skill_fk 
+    FOREIGN KEY (volunteerID)
+    REFERENCES volunteer(id),
+  CONSTRAINT skill_level_fk
+     FOREIGN KEY (skillID)
+      REFERENCES skills (id)
 );
