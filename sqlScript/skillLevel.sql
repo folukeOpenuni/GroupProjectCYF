@@ -10,3 +10,4 @@ CREATE TABLE skillLevel (
      FOREIGN KEY (skillID)
       REFERENCES skills (id)
 );
+
