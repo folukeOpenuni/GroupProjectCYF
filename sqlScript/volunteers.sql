@@ -7,13 +7,14 @@ CREATE TABLE volunteers (
     weekendAvailability VARCHAR(3),
     weekdayAvailability VARCHAR(3),
     otherAvailability VARCHAR(3),
-    classAvailability VARCHAR(3), 
+    classAvailability VARCHAR(3),
+    otherSkills VARCHAR(1000), 
     locationID INTEGER,
     status VARCHAR(20) NOT NULL,
-    submissionDate DATETIME,
+    submissionDate TIMESTAMP,
     comments VARCHAR(100),
-    welcomeEmailDate DATETIME,
-    onboardEmailDate DATETIME,
+    welcomeEmailDate TIMESTAMP,
+    onboardEmailDate TIMESTAMP,
     CONSTRAINT  volunteers_location_fk 
       FOREIGN KEY (locationID) 
       REFERENCES locations(id)
