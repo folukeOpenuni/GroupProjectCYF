@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import ButtonExampleInverted from "./Button";
 import RadioExampleToggle from "./radio"
 import CheckboxExampleShorthandElement from "./checkbox";
+import DropdownExampleMultipleSelection from "./dropdown"
 import TableExamplePadded from "./table";
 
 class NameForm extends Component {
@@ -123,6 +124,9 @@ class NameForm extends Component {
           
             
           </div>
+          <div><label><h4>In which of these areas could you see yourself helping?
+          </h4></label></div>
+          <DropdownExampleMultipleSelection />
         </div>
         <div>
           <ButtonExampleInverted placeHolder="Submit" />
