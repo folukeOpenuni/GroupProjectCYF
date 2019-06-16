@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import ButtonExampleInverted from "./Button";
-
+import RadioExampleToggle from "./radio"
 import CheckboxExampleShorthandElement from "./checkbox";
-import TableExamplePadded from "./table"
+import TableExamplePadded from "./table";
 
 class NameForm extends Component {
   constructor(props) {
@@ -31,7 +31,6 @@ class NameForm extends Component {
             type="text"
             class="form-control"
             id="exampleInputName1"
-            aria-describedby="emailHelp"
             placeholder="Type your answer here .."
             onChange={this.handleChange}
             required
@@ -40,7 +39,7 @@ class NameForm extends Component {
         <div className="form-group">
           <label for="exampleInputLname">What's your last name? </label>
           <input
-            type="text"
+            type={Text}
             class="form-control"
             id="exampleInputLname1"
             placeholder="Type your answer here .."
@@ -98,7 +97,32 @@ class NameForm extends Component {
           </div>
           <CheckboxExampleShorthandElement label="Teaching code or agile methodologies" />
           <CheckboxExampleShorthandElement label="Running and growing the organisation" />
-                < TableExamplePadded />
+          <TableExamplePadded />
+          <div>
+            <label for="exampleInputSkill">
+              What other web development related expertise could you bring to
+              CYF?{" "}
+            </label>
+
+            <input
+              type={Text}
+              class="form-control"
+              id="exampleInputSkill"
+              placeholder=" Type your answer here .."
+              onChange={this.handleChange}
+            />
+          </div>
+          <div>
+            <label for="exampleInputAvail" required>
+              <h4>
+                Awesome. Would you be available to help during our classes on
+                Saturdays/Sundays?
+              </h4>
+            </label>
+            < RadioExampleToggle/>
+          
+            
+          </div>
         </div>
         <div>
           <ButtonExampleInverted placeHolder="Submit" />
