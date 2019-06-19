@@ -8,6 +8,27 @@
   </head>
 
   <body>
+    <script>
+      if ("geolocation" in navigator) {
+        console.log("geolocation is available");
+        navigator.geolocation.getCurrentPosition(position => {
+          // console.log(position.coords.latitude);
+          // console.log(position.coords.longitude);
+          const lat = position.coords.latitude;
+          const lon = position.coords.latitude;
+
+          document.getElementById("latitude").textContent = lat;
+          document.getElementById("longitude").textContent = lon;
+          //console.log(position);
+        });
+      } else {
+        console.log("geolocation is not available");
+      }
+    </script>
     <h1>Volunteer application</h1>
+    <p>
+      Latitude: <span id="latitude"></span>&deg;<br />
+      longitude: <span id="longitude"></span>&deg;<br />
+    </p>
   </body>
 </html>
