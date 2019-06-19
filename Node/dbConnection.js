@@ -8,3 +8,13 @@ const db = new Pool({
   password: "cyf",
   port: 5432
 });
+
+db.query(
+  "SELECT firstname, lastname, email FROM volunteers",
+  (error, result) => {
+    if (error) {
+      throw error;
+    }
+    console.log(result);
+  }
+);
