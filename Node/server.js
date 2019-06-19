@@ -4,10 +4,10 @@ const Pool = require("pg").Pool; // initialise a connection pool
 
 const db = new Pool({
   // establish a new connection
-  user: "", // Your user name
-  host: "",
-  database: "", // ... username again.
-  password: "",
+  user: "cyf", // Your user name
+  host: "localhost",
+  database: "cyf", // ... username again.
+  password: "cyf",
   port: 5432
 });
 
