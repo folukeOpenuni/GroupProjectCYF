@@ -13,13 +13,14 @@ const db = new Pool({
 
 app.use(express.static("public"));
 
-app.get("/", (request, response) => {
+app.get("/volunteers", (request, response) => {
   db.query(
     "SELECT firstname, lastname, email FROM volunteers",
     (error, result) => {
       result.rows.forEach(row => {
         console.log(row.firstname, row.lastname, row.email);
       });
+      response.status(200).json({ volunteers: result.rows });
     }
   );
 });
