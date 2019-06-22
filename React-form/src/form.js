@@ -76,6 +76,7 @@ class NameForm extends Component {
             <input
               type="email"
               class="form-control"
+              name="email"
               id="exampleInputEmail1"
               placeholder="Type your email here .."
               onChange={this.handleChange}
