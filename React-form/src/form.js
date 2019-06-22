@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import ButtonExampleInverted from "./Button";
-import RadioExampleToggle from "./radio"
+import RadioExampleToggle from "./radio";
 import CheckboxExampleShorthandElement from "./checkbox";
-import DropdownExampleMultipleSelection from "./dropdown"
+import DropdownExampleMultipleSelection from "./dropdown";
+import DropdownExample2 from "./dropdown2";
 import TableExamplePadded from "./table";
 
 class NameForm extends Component {
@@ -29,9 +30,10 @@ class NameForm extends Component {
         <div className="form-group">
           <label for="exampleInputFname">What's your first name? </label>
           <input
-            type="text"
+            type={Text}
             class="form-control"
             id="exampleInputName1"
+            name= "firstName"
             placeholder="Type your answer here .."
             onChange={this.handleChange}
             required
@@ -43,6 +45,7 @@ class NameForm extends Component {
             type={Text}
             class="form-control"
             id="exampleInputLname1"
+            name="lastName"
             placeholder="Type your answer here .."
             onChange={this.handleChange}
           />
@@ -86,6 +89,7 @@ class NameForm extends Component {
               type={Number}
               class="form-control"
               id="exampleInputNumber1"
+              name="phone"
               placeholder="Type your number here If you don't mind us contacting you this way.."
               onChange={this.handleChange}
             />
@@ -107,7 +111,7 @@ class NameForm extends Component {
 
             <input
               type={Text}
-              class="form-control"
+              className="form-control"
               id="exampleInputSkill"
               placeholder=" Type your answer here .."
               onChange={this.handleChange}
@@ -120,13 +124,25 @@ class NameForm extends Component {
                 Saturdays/Sundays?
               </h4>
             </label>
-            < RadioExampleToggle/>
-          
-            
+            <RadioExampleToggle />
           </div>
-          <div><label><h4>In which of these areas could you see yourself helping?
-          </h4></label></div>
+          <div>
+            <label>
+              <h4>In which of these areas could you see yourself helping?</h4>
+            </label>
+          </div>
           <DropdownExampleMultipleSelection />
+        </div>
+        <div>
+          <div>
+            <label>
+              <h4>Awesome. When would you be available to help?</h4>
+            </label>
+          </div>
+          <DropdownExample2 />
+          <br></br>
+          <br></br>
+          <br></br>
         </div>
         <div>
           <ButtonExampleInverted placeHolder="Submit" />
