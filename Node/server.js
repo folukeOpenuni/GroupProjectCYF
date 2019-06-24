@@ -17,10 +17,22 @@ app.use(cors());
 app.use(express.static("public"));
 app.get("/volunteers", (request, response) => {
   db.query(
-    "SELECT firstname, lastname, email FROM volunteers",
+    // "SELECT firstname, lastname, email FROM volunteers",
+    "SELECT * FROM volunteers",
     (error, result) => {
       result.rows.forEach(row => {
-        console.log(row.firstname, row.lastname, row.email);
+        console.log(
+          row.firstname,
+          row.lastname,
+          row.email,
+          row.phone,
+          row.weekendAvailability,
+          row.weekdayAvailability,
+          row.otherAvailability,
+          row.classAvailability,
+          row.otherSkills,
+          row.locationID
+        );
       });
       response.status(200).json({ volunteers: result.rows });
     }
