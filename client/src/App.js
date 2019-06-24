@@ -1,45 +1,28 @@
-import React from "react";
-import logo from "./logo.svg";
+import React, { Component } from "react";
+import Heading from "./Heading";
 import "./App.css";
-import axios from "axios";
+import NameForm from "./form";
+import Button from "./Button";
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch,
+  Redirect
+} from "react-router-dom";
 
-class App extends React.Component {
-  state = {
-    location: []
-  };
-
-  componentDidMount() {
-    axios.get(`http://localhost:5000/locations`).then(res => {
-      const locations = res.data;
-      console.log(locations);
-    });
-  }
-
+class App extends Component {
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
+      <Router>
+        <div className="App">
+          <header className="App-header">
+            <Heading />
+          </header>
+          <NameForm />
+        </div>
+      </Router>
     );
   }
 }
 
 export default App;
-
-// axios.get(`http://localhost:3000/locations`).then(res => {
-//   const locations = res.data;
-//   this.setState({ locations });
-// });
