@@ -38,13 +38,11 @@ app.get("/volunteers", (request, response) => {
     }
   );
 });
-app.get("/", (request, response) => {
+app.get("/dashboardName", (request, response) => {
   db.query(
-    "SELECT firstname, lastname, email FROM volunteers",
+    "SELECT id, firstName, lastName FROM  volunteers",
     (error, result) => {
-      result.rows.forEach(row => {
-        console.log(row.firstname, row.lastname, row.email);
-      });
+      response.status(200).json({ volunteers: result.rows });
     }
   );
 });
@@ -96,5 +94,5 @@ app.post("/volunteers", (request, response) => {
 });
 
 app.listen(5000, () => {
-  console.log("server starting on port 3000......");
+  console.log("server starting on port 5000......");
 });
