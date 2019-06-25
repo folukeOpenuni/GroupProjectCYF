@@ -2,10 +2,18 @@ import React from "react";
 //import CardDeck from "react-bootstrap/CardDeck";
 import CardGroup from "react-bootstrap/CardGroup";
 import Card from "react-bootstrap/Card";
+import axios from "axios";
 
 export default class DashboardCard extends React.Component {
   constructor() {
     super();
+    this.state = { volunteers: [] };
+  }
+  componentDidMount() {
+    axios.get("http://localhost:5000/dashboardName").then(result => {
+      console.log(result.data.volunteers);
+      this.setState({ volunteers: result.data.volunteers });
+    });
   }
   render() {
     let status = [
@@ -27,7 +35,13 @@ export default class DashboardCard extends React.Component {
         </Card> */}
         <Card>
           <Card.Header>Signed Up</Card.Header>
-          <Card.Body />
+          <Card.Body>
+            <ul>
+              {this.state.volunteers.map(vol => (
+                <li>{vol.firstname}</li>
+              ))}
+            </ul>
+          </Card.Body>
         </Card>
         <Card>
           <Card.Header>Contacted</Card.Header>
