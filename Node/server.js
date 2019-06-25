@@ -55,6 +55,12 @@ app.get("/locations", (request, response) => {
   });
 });
 
+app.get("/status", (request, response) => {
+  db.query("SELECT status FROM volunteers", (error, result) => {
+    response.status(200).json({ volunteers: result.rows });
+  });
+});
+
 app.post("/volunteers", (request, response) => {
   let fn = request.body.firstName;
   let ls = request.body.lastName;
