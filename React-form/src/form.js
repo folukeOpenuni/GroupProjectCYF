@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import axios from "axios";
 import ButtonExampleInverted from "./Button";
 import RadioExampleToggle from "./radio";
 import CheckboxExampleShorthandElement from "./checkbox";
@@ -24,6 +25,10 @@ class NameForm extends Component {
     event.preventDefault();
   }
 
+  componentDidMount() {
+    axios.get("http://localhost:3000/volunteers").then;
+  }
+
   render() {
     return (
       <form onSubmit={this.handleSubmit}>
@@ -33,7 +38,7 @@ class NameForm extends Component {
             type={Text}
             class="form-control"
             id="exampleInputName1"
-            name= "firstName"
+            name="firstName"
             placeholder="Type your answer here .."
             onChange={this.handleChange}
             required
@@ -141,9 +146,9 @@ class NameForm extends Component {
             </label>
           </div>
           <DropdownExample2 />
-          <br></br>
-          <br></br>
-          <br></br>
+          <br />
+          <br />
+          <br />
         </div>
         <div>
           <ButtonExampleInverted placeHolder="Submit" />
