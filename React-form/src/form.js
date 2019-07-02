@@ -10,23 +10,55 @@ import TableExamplePadded from "./table";
 class NameForm extends Component {
   constructor(props) {
     super(props);
-    this.state = { value: "" };
+
+    this.state = {
+      // value: "",
+      firstName: "",
+      lastName: "",
+      locations: ["", ""],
+      email: "",
+      phone: "",
+      skillLevel: "",
+      skillName: "",
+      otherSkills: "",
+      description: "",
+      teachable: "",
+      weekendAvailability: "",
+      weekdayAvailability: "",
+      otherAvailability: "",
+      classAvailability: "",
+      submissionDate: ""
+    };
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
+  componentDidMount() {
+    axios.get("http://localhost:3000/locations").then(response => {
+      console.log(response);
+      const locations = response.data;
+      this.setState({ locations });
+    });
+  }
 
   handleChange(event) {
-    this.setState({ value: event.target.value });
+    // this.setState({ value: event.target.value });
+    //this.setState({ firstName: event.target.value });
+    //this.setState({ lastName: event.target.value });
+    //this.setState({ locations: event.target.value });
+    //this.setState({ email: event.target.value });
+    //this.setState({ phone: event.target.value });
+    let firstName = event.target.name;
+    let val = event.target.value;
+    this.setState({ [firstName]: val });
+    let lastName = event.target.name;
+    let val = event.target.value;
+    this.setState({ [lastName]: val });
   }
 
   handleSubmit(event) {
     alert("Application form is submitted: " + this.state.value);
     event.preventDefault();
-  }
-
-  componentDidMount() {
-    axios.get("http://localhost:3000/volunteers").then;
   }
 
   render() {
@@ -70,10 +102,12 @@ class NameForm extends Component {
           <div>
             <select onChange={this.handleChange} required>
               <option value="0">Select city</option>
-              <option value="1">London</option>
+              <option value="1">{this.state.locations.city}</option>
+
+              {/* <option value="1">London</option>
               <option value="2">Manchester</option>
               <option value="3">Glasgow</option>
-              <option value="4">Newcastle</option>
+              <option value="4">Newcastle</option> */}
             </select>
           </div>
           <div>
@@ -108,7 +142,7 @@ class NameForm extends Component {
           </div>
           <CheckboxExampleShorthandElement label="Teaching code or agile methodologies" />
           <CheckboxExampleShorthandElement label="Running and growing the organisation" />
-          <TableExamplePadded />
+          <TableExamplePadded name="skillName, skillLevel" />
           <div>
             <label for="exampleInputSkill">
               What other web development related expertise could you bring to
@@ -119,6 +153,7 @@ class NameForm extends Component {
               type={Text}
               className="form-control"
               id="exampleInputSkill"
+              name="otherSkills"
               placeholder=" Type your answer here .."
               onChange={this.handleChange}
             />
@@ -130,14 +165,14 @@ class NameForm extends Component {
                 Saturdays/Sundays?
               </h4>
             </label>
-            <RadioExampleToggle />
+            <RadioExampleToggle name="weekendAvailability" />
           </div>
           <div>
             <label>
               <h4>In which of these areas could you see yourself helping?</h4>
             </label>
           </div>
-          <DropdownExampleMultipleSelection />
+          <DropdownExampleMultipleSelection name="" />
         </div>
         <div>
           <div>
@@ -145,7 +180,7 @@ class NameForm extends Component {
               <h4>Awesome. When would you be available to help?</h4>
             </label>
           </div>
-          <DropdownExample2 />
+          <DropdownExample2 name="" />
           <br />
           <br />
           <br />
