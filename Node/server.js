@@ -93,6 +93,9 @@ app.post("/volunteers", (request, response) => {
   });
 });
 
-app.listen(3000, () => {
-  console.log("server starting on port 3000......");
+const SERVER_PORT = process.env.PORT || 3000;
+app.listen(SERVER_PORT, function() {
+  console.log(
+    `Server is listening on port ${SERVER_PORT}. Ready to accept requests!`
+  );
 });
