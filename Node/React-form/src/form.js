@@ -52,7 +52,7 @@ class NameForm extends Component {
     let val = event.target.value;
     this.setState({ [firstName]: val });
     let lastName = event.target.name;
-    let val = event.target.value;
+    //let val = event.target.value;
     this.setState({ [lastName]: val });
   }
 
