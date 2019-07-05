@@ -104,7 +104,7 @@ app.post("/volunteers", (request, response) => {
   );
 });
 
-const SERVER_PORT = process.env.PORT || 3000;
+const SERVER_PORT = process.env.PORT || 8000;
 app.listen(SERVER_PORT, function() {
   console.log(
     `Server is listening on port ${SERVER_PORT}. Ready to accept requests!`
