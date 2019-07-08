@@ -59,6 +59,30 @@ app.get("/status", (request, response) => {
   });
 });
 
+app.post("/volunteersExample", (request, response) => {
+  let fn = request.body.firstName;
+  let ls = request.body.lastName;
+  let em = request.body.email;
+  let ph = request.body.phone;
+  let st = request.body.status;
+
+  let sql =
+    "INSERT INTO volunteers (firstName, lastName, email, phone, status)" +
+    " VALUES ($1, $2, $3, $4, $5)" +
+    " RETURNING id";
+  (" RETURNING id");
+  db.query(sql, [fn, ls, em, ph, st], (err, result) => {
+    if (err) {
+      response.status(500).json({ error: err });
+    } else {
+      let newID = result.row[0].id;
+      response.status(200).json({
+        id: newID
+      });
+    }
+  });
+});
+
 app.post("/volunteers", (request, response) => {
   let fn = request.body.firstName;
   let ls = request.body.lastName;

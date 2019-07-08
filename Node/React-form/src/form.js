@@ -12,6 +12,7 @@ class NameForm extends Component {
     super(props);
 
     this.state = {
+      locations: [],
       // value: "",
       firstName: "",
       lastName: "",
@@ -34,10 +35,15 @@ class NameForm extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
   componentDidMount() {
-    axios.get("http://localhost:3000/locations").then(response => {
-      console.log(response);
-      const locations = response.data;
-      this.setState({ locations });
+    // axios.get("http://localhost:8000/locations").then(response => {
+    //   console.log(response);
+    //   const locations = response.data;
+    //   this.setState({ locations });
+    // });
+
+    axios.get("http://localhost:8000/locations").then(result => {
+      console.log(result.data.locations);
+      this.setState({ locations: result.data.locations });
     });
   }
 
