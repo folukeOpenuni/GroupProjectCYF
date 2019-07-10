@@ -42,20 +42,32 @@ app.get("/dashboardName", (request, response) => {
   db.query(
     "SELECT id, firstName, lastName FROM  volunteers",
     (error, result) => {
-      response.status(200).json({ volunteers: result.rows });
+      if (error) {
+        throw err;
+      } else {
+        response.status(200).json({ volunteers: result.rows });
+      }
     }
   );
 });
 
 app.get("/locations", (request, response) => {
   db.query("SELECT id, city, country FROM locations", (error, result) => {
-    response.status(200).json({ locations: result.rows });
+    if (error) {
+      throw error;
+    } else {
+      response.status(200).json({ locations: result.rows });
+    }
   });
 });
 
 app.get("/status", (request, response) => {
   db.query("SELECT status FROM volunteers", (error, result) => {
-    response.status(200).json({ volunteers: result.rows });
+    if (error) {
+      throw error;
+    } else {
+      response.status(200).json({ volunteers: result.rows });
+    }
   });
 });
 
@@ -70,17 +82,41 @@ app.post("/volunteersExample", (request, response) => {
     "INSERT INTO volunteers (firstName, lastName, email, phone, status)" +
     " VALUES ($1, $2, $3, $4, $5)" +
     " RETURNING id";
-  (" RETURNING id");
+  // (" RETURNING id");
   db.query(sql, [fn, ls, em, ph, st], (err, result) => {
-    if (err) {
-      response.status(500).json({ error: err });
-    } else {
+    if (err === undefined) {
       let newID = result.row[0].id;
-      response.status(200).json({
+      response.sendStatus(200).json({
         id: newID
       });
+    } else {
+      response.status(500).json({ error: err });
     }
   });
+});
+app.post("/volunteers2", async (req, res) => {
+  try {
+    let fn = req.body.firstName;
+    let ls = req.body.lastName;
+    let em = req.body.email;
+    let ph = req.body.phone;
+    let sql =
+      "INSERT INTO volunteers (firstname, lastname, email, phone) VALUES ($1, $2, $3, $4) RETURNING id";
+    await db.query(sql, [fn, ls, em, ph], (err, result) => {
+      if (err != undefined) {
+        throw err;
+      } else {
+        let newID = result.rows[0].id;
+        res.status(200).json({
+          id: newID
+        });
+      }
+    });
+  } catch (err) {
+    res.status(500).json({
+      error: err
+    });
+  }
 });
 
 app.post("/volunteers", (request, response) => {
