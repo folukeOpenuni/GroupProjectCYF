@@ -12,19 +12,17 @@ class NameForm extends Component {
     super(props);
 
     this.state = {
-      locations: [],
-      // value: "",
-      firstName: "",
-      lastName: "",
-      locations: ["", ""],
+      firstname: "",
+      lastname: "",
+      locations: "",
       email: "",
       phone: "",
       skillLevel: "",
       skillName: "",
       otherSkills: "",
       description: "",
-      teachable: "",
-      weekendAvailability: "",
+      teachable: "", //not too sure --running or teaching
+      weekendAvailability: "", //set to false by default.  yes/no q
       weekdayAvailability: "",
       otherAvailability: "",
       classAvailability: "",
@@ -44,27 +42,39 @@ class NameForm extends Component {
     axios.get("http://localhost:8000/locations").then(result => {
       console.log(result.data.locations);
       this.setState({ locations: result.data.locations });
+      console.log("state", this.state);
+    });
+  }
+
+  changeCity(event) {
+    this.setState({
+      selectedCity: event.target.value
     });
   }
 
   handleChange(event) {
-    // this.setState({ value: event.target.value });
-    //this.setState({ firstName: event.target.value });
-    //this.setState({ lastName: event.target.value });
-    //this.setState({ locations: event.target.value });
-    //this.setState({ email: event.target.value });
-    //this.setState({ phone: event.target.value });
-    let firstName = event.target.name;
-    let val = event.target.value;
-    this.setState({ [firstName]: val });
-    let lastName = event.target.name;
-    //let val = event.target.value;
-    this.setState({ [lastName]: val });
+    this.setState({
+      [event.target.name]: event.target.value
+    });
   }
 
   handleSubmit(event) {
-    alert("Application form is submitted: " + this.state.value);
     event.preventDefault();
+    let volunteer = {
+      firstName: this.state.firstname,
+      lastName: this.state.lastname,
+      locations: this.state.locations,
+      email: this.state.email,
+      phone: this.state.phone
+      //otherSkills: this.state.otherSkills
+    };
+
+    axios
+      .post("http://localhost:8000/volunteers2", { ...volunteer })
+      .then(result => {
+        console.log(result);
+        //console.log(result.data);
+      });
   }
 
   render() {
@@ -76,8 +86,9 @@ class NameForm extends Component {
             type={Text}
             class="form-control"
             id="exampleInputName1"
-            name="firstName"
+            name="firstname"
             placeholder="Type your answer here .."
+            value={this.state.firstname}
             onChange={this.handleChange}
             required
           />
@@ -88,8 +99,9 @@ class NameForm extends Component {
             type={Text}
             class="form-control"
             id="exampleInputLname1"
-            name="lastName"
+            name="lastname"
             placeholder="Type your answer here .."
+            value={this.state.lastname}
             onChange={this.handleChange}
           />
         </div>
@@ -106,14 +118,24 @@ class NameForm extends Component {
             </small>
           </div>
           <div>
-            <select onChange={this.handleChange} required>
+            <select
+              onChange={this.handleChange}
+              name="locations"
+              value={this.state.selectedCity}
+              required
+            >
               <option value="0">Select city</option>
-              <option value="1">{this.state.locations.city}</option>
-
-              {/* <option value="1">London</option>
+              <option value="1">London</option>
               <option value="2">Manchester</option>
               <option value="3">Glasgow</option>
-              <option value="4">Newcastle</option> */}
+              <option value="4">Newcastle</option>
+              {/* <option>{this.state.locations.city}</option> */}
+
+              {/* {this.state.locations.map(loc => (
+                <option value={loc.id}>
+                  {loc.city} ( {loc.country})
+                </option>
+              ))} */}
             </select>
           </div>
           <div>
@@ -124,6 +146,7 @@ class NameForm extends Component {
               name="email"
               id="exampleInputEmail1"
               placeholder="Type your email here .."
+              value={this.state.email}
               onChange={this.handleChange}
               required
             />
@@ -137,18 +160,35 @@ class NameForm extends Component {
               id="exampleInputNumber1"
               name="phone"
               placeholder="Type your number here If you don't mind us contacting you this way.."
+              value={this.state.phone}
               onChange={this.handleChange}
             />
           </div>
-
           <div>
             <label for="interest" required>
               <h4>Cool ! What are you interested in helping with ? </h4>
             </label>
           </div>
-          <CheckboxExampleShorthandElement label="Teaching code or agile methodologies" />
+          {/* <label>
+            Teaching code or agile methodologies:
+            <input type="checkbox" name="" onChange={this.handleChange} />
+          </label>
+          <br /> <br /> */}
+          <CheckboxExampleShorthandElement
+            label="Teaching code or agile methodologies"
+            name=""
+          />
           <CheckboxExampleShorthandElement label="Running and growing the organisation" />
-          <TableExamplePadded name="skillName, skillLevel" />
+          <div>
+            <label for="interest" required>
+              <h3>What is your level of expertise in the following areas?</h3>
+            </label>
+          </div>
+          <TableExamplePadded
+          // name="skillLevel"
+          // value={this.state.skillLevel}
+          // onChange={this.handleChange}
+          />
           <div>
             <label for="exampleInputSkill">
               What other web development related expertise could you bring to
@@ -161,6 +201,7 @@ class NameForm extends Component {
               id="exampleInputSkill"
               name="otherSkills"
               placeholder=" Type your answer here .."
+              value={this.state.otherSkills}
               onChange={this.handleChange}
             />
           </div>
@@ -172,6 +213,7 @@ class NameForm extends Component {
               </h4>
             </label>
             <RadioExampleToggle name="weekendAvailability" />
+            {console.log(this.state)}
           </div>
           <div>
             <label>
@@ -186,7 +228,7 @@ class NameForm extends Component {
               <h4>Awesome. When would you be available to help?</h4>
             </label>
           </div>
-          <DropdownExample2 name="" />
+          <DropdownExample2 />
           <br />
           <br />
           <br />
