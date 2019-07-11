@@ -16,27 +16,23 @@ app.use(bodyParser.json());
 app.use(cors());
 app.use(express.static("public"));
 app.get("/volunteers", (request, response) => {
-  db.query(
-    // "SELECT firstname, lastname, email FROM volunteers",
-    "SELECT * FROM volunteers",
-    (error, result) => {
-      result.rows.forEach(row => {
-        console.log(
-          row.firstname,
-          row.lastname,
-          row.email,
-          row.phone,
-          row.weekendAvailability,
-          row.weekdayAvailability,
-          row.otherAvailability,
-          row.classAvailability,
-          row.otherSkills,
-          row.locationID
-        );
-      });
-      response.status(200).json({ volunteers: result.rows });
-    }
-  );
+  db.query("SELECT * FROM volunteers", (error, result) => {
+    result.rows.forEach(row => {
+      console.log(
+        row.firstname,
+        row.lastname,
+        row.email,
+        row.phone,
+        row.weekendAvailability,
+        row.weekdayAvailability,
+        row.otherAvailability,
+        row.classAvailability,
+        row.otherSkills,
+        row.locationID
+      );
+    });
+    response.status(200).json({ volunteers: result.rows });
+  });
 });
 app.get("/dashboardName", (request, response) => {
   db.query(
@@ -94,7 +90,7 @@ app.post("/volunteersExample", (request, response) => {
     }
   });
 });
-app.post("/volunteers2", async (req, res) => {
+app.post("/volunteers", async (req, res) => {
   try {
     let fn = req.body.firstName;
     let ls = req.body.lastName;
@@ -119,7 +115,7 @@ app.post("/volunteers2", async (req, res) => {
   }
 });
 
-app.post("/volunteers", (request, response) => {
+app.post("/volunteers2", (request, response) => {
   let fn = request.body.firstName;
   let ls = request.body.lastName;
   let em = request.body.email;
