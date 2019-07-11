@@ -70,7 +70,7 @@ class NameForm extends Component {
     };
 
     axios
-      .post("http://localhost:8000/volunteers2", { ...volunteer })
+      .post("http://localhost:8000/volunteers", { ...volunteer })
       .then(result => {
         console.log(result);
         //console.log(result.data);
