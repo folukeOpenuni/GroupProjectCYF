@@ -97,11 +97,12 @@ app.post("/volunteers", async (req, res) => {
     let em = req.body.email;
     let ph = req.body.phone;
     let lo = req.body.locationID;
+    let wa = req.body.weekendAvailability;
     let sql =
       "INSERT INTO volunteers (firstname, lastname, email, " +
-      "phone, locationID)" +
-      " VALUES ($1, $2, $3, $4, $5) RETURNING id";
-    await db.query(sql, [fn, ls, em, ph, lo], (err, result) => {
+      "phone, locationID, weekendAvailability)" +
+      " VALUES ($1, $2, $3, $4, $5, $6) RETURNING id";
+    await db.query(sql, [fn, ls, em, ph, lo, wa], (err, result) => {
       if (err != undefined) {
         throw err;
       } else {
