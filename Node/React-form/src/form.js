@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 import axios from "axios";
 import ButtonExampleInverted from "./Button";
-import RadioExampleToggle from "./radio";
 import CheckboxExampleShorthandElement from "./checkbox";
 import DropdownExampleMultipleSelection from "./dropdown";
 import DropdownExample2 from "./dropdown2";
 import TableExamplePadded from "./table";
+import { Checkbox } from "semantic-ui-react";
 
 class NameForm extends Component {
   constructor(props) {
@@ -22,7 +22,6 @@ class NameForm extends Component {
         { id: 5, city: "Medellín", country: "Colombia" }
       ],
       locations: "",
-      //locationID: "",
       email: "",
       phone: "",
       skillLevel: "",
@@ -30,16 +29,18 @@ class NameForm extends Component {
       otherSkills: "",
       description: "",
       teachable: "", //not too sure --running or teaching
-      weekendAvailability: "", //set to false by default.  yes/no q
+      weekendAvailability: "true",
       weekdayAvailability: "",
       otherAvailability: "",
       classAvailability: "",
       submissionDate: ""
     };
-
+    // This binding is necessary to make `this` work in the callback
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.changeLocation = this.changeLocation.bind(this);
+    this.radioChange = this.radioChange.bind(this);
+    this.handleToggle = this.handleToggle.bind(this);
   }
   componentDidMount() {
     // axios.get("http://localhost:8000/locations").then(response => {
@@ -55,6 +56,11 @@ class NameForm extends Component {
     });
   }
 
+  radioChange(event) {
+    this.setState({
+      weekendAvailability: event.currentTarget.value
+    });
+  }
   changeLocation(event) {
     this.setState({
       selectedLocation: event.target.value
@@ -74,7 +80,8 @@ class NameForm extends Component {
       lastName: this.state.lastname,
       locationID: this.state.locationID,
       email: this.state.email,
-      phone: this.state.phone
+      phone: this.state.phone,
+      weekendAvailability: this.state.weekendAvailability ? "NO" : "YES"
       //otherSkills: this.state.otherSkills
     };
 
@@ -83,6 +90,12 @@ class NameForm extends Component {
       .then(result => {
         console.log(result);
       });
+  }
+
+  handleToggle() {
+    this.setState(prevState => ({
+      weekendAvailability: !prevState.weekendAvailability
+    }));
   }
 
   render() {
@@ -135,11 +148,6 @@ class NameForm extends Component {
               required
             >
               <option value="0">Select city</option>
-              {/* <option value="1">Glasgow (UK)</option>
-              <option value="2">London (UK)</option>
-              <option value="3">Rome (Italy)</option>
-              <option value="4">Manchester (UK)</option>
-              <option value="5">Medellín (Colombia)</option> */}
 
               {/* {this.state.locations.map(loc => (
                 <option value={loc.id}>
@@ -184,11 +192,7 @@ class NameForm extends Component {
               <h4>Cool ! What are you interested in helping with ? </h4>
             </label>
           </div>
-          {/* <label>
-            Teaching code or agile methodologies:
-            <input type="checkbox" name="" onChange={this.handleChange} />
-          </label>
-          <br /> <br /> */}
+
           <CheckboxExampleShorthandElement
             label="Teaching code or agile methodologies"
             name=""
@@ -227,8 +231,10 @@ class NameForm extends Component {
                 Saturdays/Sundays?
               </h4>
             </label>
-            <RadioExampleToggle name="weekendAvailability" />
-            {console.log(this.state)}
+
+            <Checkbox toggle onChange={this.handleToggle} />
+            {/* <h2>state: {this.state.weekendAvailability ? "NO" : "YES"}</h2> */}
+            <br />
           </div>
           <div>
             <label>
