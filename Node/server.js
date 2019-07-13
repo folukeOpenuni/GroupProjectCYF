@@ -98,20 +98,29 @@ app.post("/volunteers", async (req, res) => {
     let ph = req.body.phone;
     let lo = req.body.locationID;
     let wa = req.body.weekendAvailability;
+    let wda = req.body.weekdayAvailability;
+    let oa = req.body.otherAvailability;
+    let ca = req.body.classAvailability;
+    let os = req.body.otherSkills;
     let sql =
       "INSERT INTO volunteers (firstname, lastname, email, " +
-      "phone, locationID, weekendAvailability)" +
-      " VALUES ($1, $2, $3, $4, $5, $6) RETURNING id";
-    await db.query(sql, [fn, ls, em, ph, lo, wa], (err, result) => {
-      if (err != undefined) {
-        throw err;
-      } else {
-        let newID = result.rows[0].id;
-        res.status(200).json({
-          id: newID
-        });
+      " phone, locationID, weekendAvailability, weekdayAvailability," +
+      " otherAvailability, classAvailability, otherSkills)" +
+      " VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING id";
+    await db.query(
+      sql,
+      [fn, ls, em, ph, lo, wa, wda, oa, ca, os],
+      (err, result) => {
+        if (err != undefined) {
+          throw err;
+        } else {
+          let newID = result.rows[0].id;
+          res.status(200).json({
+            id: newID
+          });
+        }
       }
-    });
+    );
   } catch (err) {
     res.status(500).json({
       error: err
