@@ -30,9 +30,9 @@ class NameForm extends Component {
       description: "",
       teachable: "", //not too sure --running or teaching
       weekendAvailability: "true",
-      weekdayAvailability: "",
-      otherAvailability: "",
-      classAvailability: "",
+      weekdayAvailability: "true",
+      otherAvailability: "true",
+      classAvailability: "true",
       submissionDate: ""
     };
     // This binding is necessary to make `this` work in the callback
@@ -41,6 +41,9 @@ class NameForm extends Component {
     this.changeLocation = this.changeLocation.bind(this);
     this.radioChange = this.radioChange.bind(this);
     this.handleToggle = this.handleToggle.bind(this);
+    this.weekdayAvaiHandler = this.weekdayAvaiHandler.bind(this);
+    this.classAvaiHandler = this.classAvaiHandler.bind(this);
+    this.otherAvaiHandler = this.otherAvaiHandler.bind(this);
   }
   componentDidMount() {
     // axios.get("http://localhost:8000/locations").then(response => {
@@ -78,11 +81,14 @@ class NameForm extends Component {
     let volunteer = {
       firstName: this.state.firstname,
       lastName: this.state.lastname,
-      locationID: this.state.locationID,
+      locationID: this.state.location,
       email: this.state.email,
       phone: this.state.phone,
-      weekendAvailability: this.state.weekendAvailability ? "NO" : "YES"
-      //otherSkills: this.state.otherSkills
+      weekendAvailability: this.state.weekendAvailability ? "NO" : "YES",
+      weekdayAvailability: this.state.weekdayAvailability ? "NO" : "YES",
+      otherAvailability: this.state.otherAvailability ? "NO" : "YES",
+      classAvailability: this.state.classAvailability ? "NO" : "YES",
+      otherSkills: this.state.otherSkills
     };
 
     axios
@@ -95,6 +101,27 @@ class NameForm extends Component {
   handleToggle() {
     this.setState(prevState => ({
       weekendAvailability: !prevState.weekendAvailability
+    }));
+  }
+
+  //weekdayAvailabilityHandler
+  weekdayAvaiHandler() {
+    this.setState(prevState => ({
+      weekdayAvailability: !prevState.weekdayAvailability
+    }));
+  }
+
+  //classAvailabilityHandler
+  classAvaiHandler() {
+    this.setState(prevState => ({
+      classAvailability: !prevState.classAvailability
+    }));
+  }
+
+  //otherAvailabilityHandler
+  otherAvaiHandler() {
+    this.setState(prevState => ({
+      otherAvailability: !prevState.otherAvailability
     }));
   }
 
@@ -161,6 +188,7 @@ class NameForm extends Component {
               ))}
             </select>
           </div>
+          {/* {console.log(typeof this.state.locations.map)} */}
           <div>
             <label for="exampleInputEmail">What's your email address? </label>
             <input
@@ -211,7 +239,7 @@ class NameForm extends Component {
           <div>
             <label for="exampleInputSkill">
               What other web development related expertise could you bring to
-              CYF?{" "}
+              CYF?
             </label>
 
             <input
@@ -233,7 +261,7 @@ class NameForm extends Component {
             </label>
 
             <Checkbox toggle onChange={this.handleToggle} />
-            {/* <h2>state: {this.state.weekendAvailability ? "NO" : "YES"}</h2> */}
+            <span> {this.state.weekendAvailability ? "NO" : "YES"}</span>
             <br />
           </div>
           <div>
@@ -249,8 +277,28 @@ class NameForm extends Component {
               <h4>Awesome. When would you be available to help?</h4>
             </label>
           </div>
-          <DropdownExample2 />
-          <br />
+          <div>
+            <small class="form-text text-muted">
+              select as many as you like
+            </small>
+          </div>
+          <div>
+            <label>During our classes on Saturdays/Sundays</label>
+            <Checkbox toggle onChange={this.classAvaiHandler} />
+            <span> {this.state.classAvailability ? "NO" : "YES"}</span>
+          </div>
+          <div>
+            <label>During the week</label>
+            <Checkbox toggle onChange={this.weekdayAvaiHandler} />
+            <span> {this.state.weekdayAvailability ? "NO" : "YES"}</span>
+          </div>
+          <div>
+            <label>Other</label>
+            <Checkbox toggle onChange={this.otherAvaiHandler} />
+            <span> {this.state.otherAvailability ? "NO" : "YES"}</span>
+          </div>
+
+          {/* <DropdownExample2 /> */}
           <br />
           <br />
         </div>
