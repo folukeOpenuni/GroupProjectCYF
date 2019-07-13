@@ -67,6 +67,16 @@ app.get("/status", (request, response) => {
   });
 });
 
+app.get("/skill", (request, response) => {
+  db.query("SELECT id, skillName FROM skills", (error, result) => {
+    if (error) {
+      throw error;
+    } else {
+      response.status(200).json({ skills: result.rows });
+    }
+  });
+});
+
 app.post("/volunteersExample", (request, response) => {
   let fn = request.body.firstName;
   let ls = request.body.lastName;
