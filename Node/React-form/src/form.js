@@ -3,7 +3,7 @@ import axios from "axios";
 import ButtonExampleInverted from "./Button";
 import CheckboxExampleShorthandElement from "./checkbox";
 import DropdownExampleMultipleSelection from "./dropdown";
-import DropdownExample2 from "./dropdown2";
+// import DropdownExample2 from "./dropdown2";
 import TableExamplePadded from "./table";
 import { Checkbox } from "semantic-ui-react";
 
@@ -14,14 +14,7 @@ class NameForm extends Component {
     this.state = {
       firstname: "",
       lastname: "",
-      loc: [
-        { id: 1, city: "Glasgow", country: "UK" },
-        { id: 2, city: "London", country: "UK" },
-        { id: 3, city: "Rome", country: "Italy" },
-        { id: 4, city: "Manchester", country: "UK" },
-        { id: 5, city: "Medellín", country: "Colombia" }
-      ],
-      locations: "",
+      locations: [],
       email: "",
       phone: "",
       skillLevel: "",
@@ -56,6 +49,13 @@ class NameForm extends Component {
       console.log(result.data.locations);
       this.setState({ locations: result.data.locations });
       // console.log("state", this.state);
+    });
+  }
+
+  onClick(event) {
+    const currentTarget = event.currentTarget;
+    this.setState({
+      skillLevel: currentTarget.getAttribute("aria-posinset")
     });
   }
 
@@ -176,16 +176,17 @@ class NameForm extends Component {
             >
               <option value="0">Select city</option>
 
-              {/* {this.state.locations.map(loc => (
+              {this.state.locations.map(loc => (
                 <option value={loc.id}>
                   {loc.city} ( {loc.country})
                 </option>
-              ))} */}
-              {this.state.loc.map(l => (
+              ))}
+
+              {/* {this.state.loc.map(l => (
                 <option value={l.id}>
                   {l.city} ({l.country})
                 </option>
-              ))}
+              ))} */}
             </select>
           </div>
           {/* {console.log(typeof this.state.locations.map)} */}
@@ -231,11 +232,7 @@ class NameForm extends Component {
               <h3>What is your level of expertise in the following areas?</h3>
             </label>
           </div>
-          <TableExamplePadded
-          // name="skillLevel"
-          // value={this.state.skillLevel}
-          // onChange={this.handleChange}
-          />
+          <TableExamplePadded handleSkill={this.onClick} />
           <div>
             <label for="exampleInputSkill">
               What other web development related expertise could you bring to
