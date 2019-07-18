@@ -1,75 +1,50 @@
 import React from "react";
-import axios from "axios";
 import { Header, Table, Rating } from "semantic-ui-react";
 
 class TableExamplePadded extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      skills: []
+      skill1: ""
     };
-    this.handleChange = this.handleChange.bind(this);
     this.handleSkillLevel = this.handleSkillLevel.bind(this);
   }
 
-  componentDidMount() {
-    axios.get("http://localhost:8000/skill").then(result => {
-      console.log(result.data.skills);
-      this.setState({ skills: result.data.skills });
-      console.log("state", this.state.skills);
+  handleSkillLevel = (keyName, e) => {
+    this.setState({
+      [keyName]: e.target.getAttribute("aria-posinset")
+    });
+  };
+
+  handleSkill1(event) {
+    this.setState({
+      skill1: event.currentTarget.getAttribute("aria-posinset")
+      //skill2: event.currentTarget.getAttribute("aria-posinset")
+    });
+  }
+  handleSkill2(event) {
+    this.setState({
+      skill2: event.currentTarget.getAttribute("aria-posinset")
     });
   }
 
-  // handleChange(event) {
-  //   //const currentTarget = event.currentTarget;
-  //   // console.log(currentTarget);
-  //   // [event.target.name]: event.target.value
-
-  //   this.setState({
-  //     skillLevel: event.target.getAttribute("aria-posinset")
-  //     //[event.target.name]: event.target.getAttribute("aria-posinset")
-  //   });
-
-  //   console.log(event.currentTarget.getAttribute("aria-posinset"));
-  //   //console.log(event.target.getAttribute("aria-posinset"));
-  //   console.log("Skill level is: " + this.state.skillLevel);
-  // }
-  handleChange(event) {
+  handleSkill3(event) {
     this.setState({
-      [event.target.name]: event.target.value
+      skill3: event.currentTarget.getAttribute("aria-posinset")
     });
   }
-
-  handleSkillLevel(event) {
+  handleSkill4(event) {
     this.setState({
-      selectedSkillLevel: event.target.getAttribute("aria-posinset")
+      skill4: event.currentTarget.getAttribute("aria-posinset")
     });
-    console.log(event.target.getAttribute("aria-posinset"));
-    console.log("selected skill Level: " + this.state.selectedSkillLevel);
+  }
+  handleSkill5(event) {
+    this.setState({
+      skill5: event.currentTarget.getAttribute("aria-posinset")
+    });
   }
 
   render() {
-    const Row = ({ children }) => (
-      <Table.Row>
-        <Table.Cell>
-          <Header as="h4" textAlign="center">
-            {children}
-          </Header>
-        </Table.Cell>
-
-        <Table.Cell>
-          <Rating
-            //onChange={this.handleChange}
-            name="skillLevel"
-            icon="star"
-            defaultRating={0}
-            maxRating={5}
-            onRate={this.handleSkillLevel}
-            //value={this.state.selectedSkillLevel}
-          />
-        </Table.Cell>
-      </Table.Row>
-    );
     return (
       <div>
         <Table celled padded>
@@ -82,14 +57,99 @@ class TableExamplePadded extends React.Component {
               <Table.HeaderCell>Level</Table.HeaderCell>
             </Table.Row>
           </Table.Header>
+
           <Table.Body>
-            {/* reset the skillIterator each time we call map */}
-            {this.state.skills.map(s => (
-              <Row value={s.id}>{s.skillname}</Row>
-            ))}
+            <Table.Row>
+              <Table.Cell>
+                <Header as="h4" textAlign="center">
+                  HTML/CSS
+                </Header>
+              </Table.Cell>
+
+              <Table.Cell>
+                <Rating
+                  icon="star"
+                  defaultRating={0}
+                  maxRating={5}
+                  onRate={e => this.handleSkill1(e)}
+                />
+                <p>State level: {this.state.skill1}</p>
+              </Table.Cell>
+            </Table.Row>
+
+            <Table.Row>
+              <Table.Cell>
+                <Header as="h4" textAlign="center">
+                  JavaScript
+                </Header>
+              </Table.Cell>
+
+              <Table.Cell>
+                <Rating
+                  icon="star"
+                  defaultRating={0}
+                  maxRating={5}
+                  onRate={e => this.handleSkill2(e)}
+                />
+                <p>State level: {this.state.skill2}</p>
+              </Table.Cell>
+            </Table.Row>
+
+            <Table.Row>
+              <Table.Cell>
+                <Header as="h4" textAlign="center">
+                  React
+                </Header>
+              </Table.Cell>
+
+              <Table.Cell>
+                <Rating
+                  icon="star"
+                  defaultRating={0}
+                  maxRating={5}
+                  onRate={e => this.handleSkill3(e)}
+                />
+                <p>State level: {this.state.skill3}</p>
+              </Table.Cell>
+            </Table.Row>
+
+            <Table.Row>
+              <Table.Cell>
+                <Header as="h4" textAlign="center">
+                  Node/SQL
+                </Header>
+              </Table.Cell>
+
+              <Table.Cell>
+                <Rating
+                  icon="star"
+                  defaultRating={0}
+                  maxRating={5}
+                  onRate={e => this.handleSkill4(e)}
+                />
+                <p>State level: {this.state.skill4}</p>
+              </Table.Cell>
+            </Table.Row>
+
+            <Table.Row>
+              <Table.Cell>
+                <Header as="h4" textAlign="center">
+                  Agile Methodologies
+                </Header>
+              </Table.Cell>
+
+              <Table.Cell>
+                <Rating
+                  icon="star"
+                  defaultRating={0}
+                  maxRating={5}
+                  onRate={e => this.handleSkill5(e)}
+                />
+                <p>State level: {this.state.skill5}</p>
+              </Table.Cell>
+            </Table.Row>
           </Table.Body>
         </Table>
-        <p>State level: {this.state.skillLevel}</p>
       </div>
     );
   }
