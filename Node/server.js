@@ -68,7 +68,7 @@ app.get("/status", (request, response) => {
 });
 
 app.get("/skill", (request, response) => {
-  db.query("SELECT id, skillName FROM skills", (error, result) => {
+  db.query("SELECT id, skillName FROM skills LIMIT 5", (error, result) => {
     if (error) {
       throw error;
     } else {
