@@ -1,13 +1,19 @@
 import React from "react";
 import { Header, Table, Rating } from "semantic-ui-react";
-
+import axios from "axios";
 class TableExamplePadded extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      skill1: ""
+      skillsDetails: []
     };
-    this.handleSkillLevel = this.handleSkillLevel.bind(this);
+  }
+
+  componentDidMount() {
+    axios.get("http://localhost:8000/skill").then(result => {
+      this.setState({ skills: result.data.skills });
+      console.log("skill state", this.state.skills);
+    });
   }
 
   handleSkillLevel = (keyName, e) => {
@@ -16,33 +22,33 @@ class TableExamplePadded extends React.Component {
     });
   };
 
-  handleSkill1(event) {
+  handleSkill1 = event => {
     this.setState({
       skill1: event.currentTarget.getAttribute("aria-posinset")
       //skill2: event.currentTarget.getAttribute("aria-posinset")
     });
-  }
-  handleSkill2(event) {
+  };
+  handleSkill2 = event => {
     this.setState({
       skill2: event.currentTarget.getAttribute("aria-posinset")
     });
-  }
+  };
 
-  handleSkill3(event) {
+  handleSkill3 = event => {
     this.setState({
       skill3: event.currentTarget.getAttribute("aria-posinset")
     });
-  }
-  handleSkill4(event) {
+  };
+  handleSkill4 = event => {
     this.setState({
       skill4: event.currentTarget.getAttribute("aria-posinset")
     });
-  }
-  handleSkill5(event) {
+  };
+  handleSkill5 = event => {
     this.setState({
       skill5: event.currentTarget.getAttribute("aria-posinset")
     });
-  }
+  };
 
   render() {
     return (
