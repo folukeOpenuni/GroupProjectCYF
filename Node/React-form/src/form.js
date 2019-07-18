@@ -38,24 +38,11 @@ class NameForm extends Component {
     this.otherAvaiHandler = this.otherAvaiHandler.bind(this);
   }
   componentDidMount() {
-    // axios.get("http://localhost:8000/locations").then(response => {
-    //   console.log(response);
-    //   const locations = response.data;
-    //   this.setState({ locations });
-    // });
-
     axios.get("http://localhost:8000/locations").then(result => {
-      console.log(result.data.locations);
+      //console.log(result.data.locations);
       this.setState({ locations: result.data.locations });
     });
   }
-
-  // onClick(event) {
-  //   const currentTarget = event.currentTarget;
-  //   this.setState({
-  //     skillLevel: currentTarget.getAttribute("aria-posinset")
-  //   });
-  // }
 
   radioChange(event) {
     this.setState({

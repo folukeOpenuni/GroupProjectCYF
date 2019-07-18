@@ -1,18 +1,39 @@
 import React from "react";
 import { Header, Table, Rating } from "semantic-ui-react";
 import axios from "axios";
+
+const skillID = 1;
+const skillname1 = "HTML/CSS";
+
+const sd = [
+  {
+    id: 1,
+    skillname: "HTML & CSS"
+  },
+  { id: 2, skillname: "JavaScript" },
+  {
+    id: 3,
+    skillname: "React"
+  },
+  {
+    id: 4,
+    skillname: "Node/SQL"
+  },
+  { id: 5, skillname: "Agile Methodologies" }
+];
+
 class TableExamplePadded extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      skillsDetails: []
+      skillsDetails: [],
+      skills: []
     };
   }
 
   componentDidMount() {
     axios.get("http://localhost:8000/skill").then(result => {
       this.setState({ skills: result.data.skills });
-      console.log("skill state", this.state.skills);
     });
   }
 
@@ -23,10 +44,15 @@ class TableExamplePadded extends React.Component {
   };
 
   handleSkill1 = event => {
+    //const skillID = 1;
+
     this.setState({
       skill1: event.currentTarget.getAttribute("aria-posinset")
-      //skill2: event.currentTarget.getAttribute("aria-posinset")
     });
+    // console.log(this.state.skillsDetails.concat(skillID, this.state.skill1));
+
+    //console.log(this.state.skillsDetails);
+    //console.log(this.state.skillsDetails.push(1, this.state.skill1));
   };
   handleSkill2 = event => {
     this.setState({
@@ -59,19 +85,17 @@ class TableExamplePadded extends React.Component {
               <Table.HeaderCell singleLine>
                 Programming Language
               </Table.HeaderCell>
-
               <Table.HeaderCell>Level</Table.HeaderCell>
             </Table.Row>
           </Table.Header>
-
           <Table.Body>
             <Table.Row>
               <Table.Cell>
                 <Header as="h4" textAlign="center">
-                  HTML/CSS
+                  {/* HTML/CSS */}
+                  {skillname1}
                 </Header>
               </Table.Cell>
-
               <Table.Cell>
                 <Rating
                   icon="star"
@@ -80,16 +104,17 @@ class TableExamplePadded extends React.Component {
                   onRate={e => this.handleSkill1(e)}
                 />
                 <p>State level: {this.state.skill1}</p>
+                <span>
+                  {this.state.skillsDetails.concat(skillID, this.state.skill1)}
+                </span>
               </Table.Cell>
             </Table.Row>
-
             <Table.Row>
               <Table.Cell>
                 <Header as="h4" textAlign="center">
                   JavaScript
                 </Header>
               </Table.Cell>
-
               <Table.Cell>
                 <Rating
                   icon="star"
@@ -100,14 +125,12 @@ class TableExamplePadded extends React.Component {
                 <p>State level: {this.state.skill2}</p>
               </Table.Cell>
             </Table.Row>
-
             <Table.Row>
               <Table.Cell>
                 <Header as="h4" textAlign="center">
                   React
                 </Header>
               </Table.Cell>
-
               <Table.Cell>
                 <Rating
                   icon="star"
@@ -118,14 +141,12 @@ class TableExamplePadded extends React.Component {
                 <p>State level: {this.state.skill3}</p>
               </Table.Cell>
             </Table.Row>
-
             <Table.Row>
               <Table.Cell>
                 <Header as="h4" textAlign="center">
                   Node/SQL
                 </Header>
               </Table.Cell>
-
               <Table.Cell>
                 <Rating
                   icon="star"
@@ -136,14 +157,12 @@ class TableExamplePadded extends React.Component {
                 <p>State level: {this.state.skill4}</p>
               </Table.Cell>
             </Table.Row>
-
             <Table.Row>
               <Table.Cell>
                 <Header as="h4" textAlign="center">
                   Agile Methodologies
                 </Header>
               </Table.Cell>
-
               <Table.Cell>
                 <Rating
                   icon="star"
