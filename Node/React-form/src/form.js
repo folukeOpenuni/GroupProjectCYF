@@ -3,7 +3,6 @@ import axios from "axios";
 import ButtonExampleInverted from "./Button";
 import CheckboxExampleShorthandElement from "./checkbox";
 import DropdownExampleMultipleSelection from "./dropdown";
-// import DropdownExample2 from "./dropdown2";
 import TableExamplePadded from "./table";
 import { Checkbox } from "semantic-ui-react";
 
@@ -17,8 +16,8 @@ class NameForm extends Component {
       locations: [],
       email: "",
       phone: "",
-      skillLevel: "",
-      skillName: "",
+      skillLevel: [],
+      skillName: [],
       otherSkills: "",
       description: "",
       teachable: "", //not too sure --running or teaching
@@ -48,16 +47,15 @@ class NameForm extends Component {
     axios.get("http://localhost:8000/locations").then(result => {
       console.log(result.data.locations);
       this.setState({ locations: result.data.locations });
-      // console.log("state", this.state);
     });
   }
 
-  onClick(event) {
-    const currentTarget = event.currentTarget;
-    this.setState({
-      skillLevel: currentTarget.getAttribute("aria-posinset")
-    });
-  }
+  // onClick(event) {
+  //   const currentTarget = event.currentTarget;
+  //   this.setState({
+  //     skillLevel: currentTarget.getAttribute("aria-posinset")
+  //   });
+  // }
 
   radioChange(event) {
     this.setState({
@@ -171,25 +169,16 @@ class NameForm extends Component {
               onChange={this.handleChange}
               name="location"
               value={this.state.selectedLocation}
-              //value={this.state.onChange}
               required
             >
               <option value="0">Select city</option>
-
               {this.state.locations.map(loc => (
                 <option value={loc.id}>
                   {loc.city} ( {loc.country})
                 </option>
               ))}
-
-              {/* {this.state.loc.map(l => (
-                <option value={l.id}>
-                  {l.city} ({l.country})
-                </option>
-              ))} */}
             </select>
           </div>
-          {/* {console.log(typeof this.state.locations.map)} */}
           <div>
             <label for="exampleInputEmail">What's your email address? </label>
             <input
@@ -232,7 +221,9 @@ class NameForm extends Component {
               <h3>What is your level of expertise in the following areas?</h3>
             </label>
           </div>
-          <TableExamplePadded handleSkill={this.onClick} />
+          {/* <TableExamplePadded handleSkill={this.onClick} /> */}
+          <TableExamplePadded />
+
           <div>
             <label for="exampleInputSkill">
               What other web development related expertise could you bring to
