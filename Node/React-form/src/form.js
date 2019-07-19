@@ -25,7 +25,12 @@ class NameForm extends Component {
       weekdayAvailability: "true",
       otherAvailability: "true",
       classAvailability: "true",
-      submissionDate: ""
+      submissionDate: "",
+      skill1: "",
+      skill2: "",
+      skill3: "",
+      skill4: "",
+      skill5: ""
     };
     // This binding is necessary to make `this` work in the callback
     this.handleChange = this.handleChange.bind(this);
@@ -41,6 +46,7 @@ class NameForm extends Component {
     axios.get("http://localhost:8000/locations").then(result => {
       //console.log(result.data.locations);
       this.setState({ locations: result.data.locations });
+      console.log("state", this.state);
     });
   }
 
@@ -74,6 +80,7 @@ class NameForm extends Component {
       otherAvailability: this.state.otherAvailability ? "NO" : "YES",
       classAvailability: this.state.classAvailability ? "NO" : "YES",
       otherSkills: this.state.otherSkills
+      //skill: this.state.skill1
     };
 
     axios
@@ -81,6 +88,29 @@ class NameForm extends Component {
       .then(result => {
         console.log(result);
       });
+
+    // this.setState({
+    //   firstname: "",
+    //   lastname: "",
+    //   locations: [],
+    //   email: "",
+    //   phone: "",
+    //   skillLevel: [],
+    //   skillName: [],
+    //   otherSkills: "",
+    //   description: "",
+    //   teachable: "", //not too sure --running or teaching
+    //   weekendAvailability: "true",
+    //   weekdayAvailability: "true",
+    //   otherAvailability: "true",
+    //   classAvailability: "true",
+    //   submissionDate: "",
+    //   skill1: "",
+    //   skill2: "",
+    //   skill3: "",
+    //   skill4: "",
+    //   skill5: ""
+    // });
   }
 
   handleToggle() {
@@ -88,7 +118,34 @@ class NameForm extends Component {
       weekendAvailability: !prevState.weekendAvailability
     }));
   }
+  updateSkill1 = event => {
+    this.setState({
+      skill1: event.currentTarget.getAttribute("aria-posinset")
+    });
+  };
+  updateSkill2 = event => {
+    this.setState({
+      skill2: event.currentTarget.getAttribute("aria-posinset")
+    });
+  };
 
+  updateSkill3 = event => {
+    this.setState({
+      skill3: event.currentTarget.getAttribute("aria-posinset")
+    });
+  };
+
+  updateSkill4 = event => {
+    this.setState({
+      skill4: event.currentTarget.getAttribute("aria-posinset")
+    });
+  };
+
+  updateSkill5 = event => {
+    this.setState({
+      skill5: event.currentTarget.getAttribute("aria-posinset")
+    });
+  };
   //weekdayAvailabilityHandler
   weekdayAvaiHandler() {
     this.setState(prevState => ({
@@ -209,8 +266,14 @@ class NameForm extends Component {
             </label>
           </div>
           {/* <TableExamplePadded handleSkill={this.onClick} /> */}
-          <TableExamplePadded />
-
+          <TableExamplePadded
+            updateSkill2={this.updateSkill2}
+            updateSkill1={this.updateSkill1}
+            updateSkill3={this.updateSkill3}
+            updateSkill4={this.updateSkill4}
+            updateSkill5={this.updateSkill5}
+          />
+          {console.log(this.state)}
           <div>
             <label for="exampleInputSkill">
               What other web development related expertise could you bring to
