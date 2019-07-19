@@ -57,28 +57,16 @@ class TableExamplePadded extends React.Component {
   };
   handleSkill2 = event => {
     this.props.updateSkill2(event);
-    this.setState({
-      skill2: event.currentTarget.getAttribute("aria-posinset")
-    });
   };
 
   handleSkill3 = event => {
     this.props.updateSkill3(event);
-    this.setState({
-      skill3: event.currentTarget.getAttribute("aria-posinset")
-    });
   };
   handleSkill4 = event => {
     this.props.updateSkill4(event);
-    this.setState({
-      skill4: event.currentTarget.getAttribute("aria-posinset")
-    });
   };
   handleSkill5 = event => {
     this.props.updateSkill5(event);
-    this.setState({
-      skill5: event.currentTarget.getAttribute("aria-posinset")
-    });
   };
 
   render() {
@@ -108,10 +96,6 @@ class TableExamplePadded extends React.Component {
                   maxRating={5}
                   onRate={e => this.handleSkill1(e)}
                 />
-                <p>State level: {this.state.skill1}</p>
-                <span>
-                  {this.state.skillsDetails.concat(skillID, this.state.skill1)}
-                </span>
               </Table.Cell>
             </Table.Row>
             <Table.Row>
@@ -127,7 +111,6 @@ class TableExamplePadded extends React.Component {
                   maxRating={5}
                   onRate={e => this.handleSkill2(e)}
                 />
-                <p>State level: {this.state.skill2}</p>
               </Table.Cell>
             </Table.Row>
             <Table.Row>
@@ -143,7 +126,6 @@ class TableExamplePadded extends React.Component {
                   maxRating={5}
                   onRate={e => this.handleSkill3(e)}
                 />
-                <p>State level: {this.state.skill3}</p>
               </Table.Cell>
             </Table.Row>
             <Table.Row>
@@ -159,7 +141,6 @@ class TableExamplePadded extends React.Component {
                   maxRating={5}
                   onRate={e => this.handleSkill4(e)}
                 />
-                <p>State level: {this.state.skill4}</p>
               </Table.Cell>
             </Table.Row>
             <Table.Row>
@@ -175,7 +156,6 @@ class TableExamplePadded extends React.Component {
                   maxRating={5}
                   onRate={e => this.handleSkill5(e)}
                 />
-                <p>State level: {this.state.skill5}</p>
               </Table.Cell>
             </Table.Row>
           </Table.Body>
