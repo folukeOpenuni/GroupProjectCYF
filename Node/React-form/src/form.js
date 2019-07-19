@@ -26,11 +26,11 @@ class NameForm extends Component {
       otherAvailability: "true",
       classAvailability: "true",
       submissionDate: "",
-      skill1: "",
-      skill2: "",
-      skill3: "",
-      skill4: "",
-      skill5: ""
+      skill1: {},
+      skill2: {},
+      skill3: {},
+      skill4: {},
+      skill5: {}
     };
     // This binding is necessary to make `this` work in the callback
     this.handleChange = this.handleChange.bind(this);
@@ -79,8 +79,12 @@ class NameForm extends Component {
       weekdayAvailability: this.state.weekdayAvailability ? "NO" : "YES",
       otherAvailability: this.state.otherAvailability ? "NO" : "YES",
       classAvailability: this.state.classAvailability ? "NO" : "YES",
-      otherSkills: this.state.otherSkills
-      //skill: this.state.skill1
+      otherSkills: this.state.otherSkills,
+      skill1: this.state.skill1,
+      skill2: this.skill2,
+      skill3: this.skill3,
+      skill4: this.state.skill4,
+      skill5: this.state.skill5
     };
 
     axios
@@ -118,32 +122,49 @@ class NameForm extends Component {
       weekendAvailability: !prevState.weekendAvailability
     }));
   }
+
   updateSkill1 = event => {
     this.setState({
-      skill1: event.currentTarget.getAttribute("aria-posinset")
+      skill1: {
+        skillId: 1,
+        skillLevel: event.currentTarget.getAttribute("aria-posinset")
+      }
     });
   };
+
   updateSkill2 = event => {
     this.setState({
-      skill2: event.currentTarget.getAttribute("aria-posinset")
+      skill2: {
+        skillId: 2,
+        skillLevel: event.currentTarget.getAttribute("aria-posinset")
+      }
     });
   };
 
   updateSkill3 = event => {
     this.setState({
-      skill3: event.currentTarget.getAttribute("aria-posinset")
+      skill3: {
+        skillId: 3,
+        skillLevel: event.currentTarget.getAttribute("aria-posinset")
+      }
     });
   };
 
   updateSkill4 = event => {
     this.setState({
-      skill4: event.currentTarget.getAttribute("aria-posinset")
+      skill4: {
+        skillId: 4,
+        skillLevel: event.currentTarget.getAttribute("aria-posinset")
+      }
     });
   };
 
   updateSkill5 = event => {
     this.setState({
-      skill5: event.currentTarget.getAttribute("aria-posinset")
+      skill5: {
+        skillId: 5,
+        skillValue: event.currentTarget.getAttribute("aria-posinset")
+      }
     });
   };
   //weekdayAvailabilityHandler
