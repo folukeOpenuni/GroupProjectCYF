@@ -1,6 +1,7 @@
 import React from "react";
-import { Header, Table, Rating } from "semantic-ui-react";
 import axios from "axios";
+import updateSkillState from "./form";
+import { Header, Table, Rating } from "semantic-ui-react";
 
 const skillID = 1;
 const skillname1 = "HTML/CSS";
@@ -26,6 +27,11 @@ class TableExamplePadded extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      skill1: "",
+      skill2: "",
+      skill3: "",
+      skill4: "",
+      skill5: "",
       skillsDetails: [],
       skills: []
     };
@@ -44,33 +50,32 @@ class TableExamplePadded extends React.Component {
   };
 
   handleSkill1 = event => {
-    //const skillID = 1;
-
+    this.props.updateSkill1(event);
     this.setState({
       skill1: event.currentTarget.getAttribute("aria-posinset")
     });
-    // console.log(this.state.skillsDetails.concat(skillID, this.state.skill1));
-
-    //console.log(this.state.skillsDetails);
-    //console.log(this.state.skillsDetails.push(1, this.state.skill1));
   };
   handleSkill2 = event => {
+    this.props.updateSkill2(event);
     this.setState({
       skill2: event.currentTarget.getAttribute("aria-posinset")
     });
   };
 
   handleSkill3 = event => {
+    this.props.updateSkill3(event);
     this.setState({
       skill3: event.currentTarget.getAttribute("aria-posinset")
     });
   };
   handleSkill4 = event => {
+    this.props.updateSkill4(event);
     this.setState({
       skill4: event.currentTarget.getAttribute("aria-posinset")
     });
   };
   handleSkill5 = event => {
+    this.props.updateSkill5(event);
     this.setState({
       skill5: event.currentTarget.getAttribute("aria-posinset")
     });
@@ -179,5 +184,4 @@ class TableExamplePadded extends React.Component {
     );
   }
 }
-
 export default TableExamplePadded;
