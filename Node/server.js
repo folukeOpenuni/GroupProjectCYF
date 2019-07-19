@@ -112,6 +112,7 @@ app.post("/volunteers", async (req, res) => {
     let oa = req.body.otherAvailability;
     let ca = req.body.classAvailability;
     let os = req.body.otherSkills;
+    let sl1 = req.body.skillLevel;
     let sql =
       "INSERT INTO volunteers (firstname, lastname, email, " +
       " phone, locationID, weekendAvailability, weekdayAvailability," +
@@ -125,6 +126,10 @@ app.post("/volunteers", async (req, res) => {
           throw err;
         } else {
           let newID = result.rows[0].id;
+          let sql2 =
+            "INSERT INTO skillLevels (volunteerID, skillID, skillLevel)" +
+            " VALUES ($1, $2, $3)";
+          db.query(sql2, [newID, sl1.skillId, sl1.skillLevel]);
           res.status(200).json({
             id: newID
           });
