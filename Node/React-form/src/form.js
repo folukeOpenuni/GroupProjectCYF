@@ -6,7 +6,7 @@ import DropdownExampleMultipleSelection from "./dropdown";
 import TableExamplePadded from "./table";
 import { Checkbox } from "semantic-ui-react";
 
-class NameForm extends Component {
+class Form extends Component {
   constructor(props) {
     super(props);
 
@@ -16,8 +16,6 @@ class NameForm extends Component {
       locations: [],
       email: "",
       phone: "",
-      skillLevel: [],
-      skillName: [],
       otherSkills: "",
       description: "",
       teachable: "", //not too sure --running or teaching
@@ -80,9 +78,9 @@ class NameForm extends Component {
       otherAvailability: this.state.otherAvailability ? "NO" : "YES",
       classAvailability: this.state.classAvailability ? "NO" : "YES",
       otherSkills: this.state.otherSkills,
-      skill1: this.state.skill1,
-      skill2: this.skill2,
-      skill3: this.skill3,
+      skillLevel: this.state.skill1,
+      skill2: this.state.skill2,
+      skill3: this.state.skill3,
       skill4: this.state.skill4,
       skill5: this.state.skill5
     };
@@ -368,4 +366,4 @@ class NameForm extends Component {
     );
   }
 }
-export default NameForm;
+export default Form;
