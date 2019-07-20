@@ -116,8 +116,8 @@ app.post("/volunteers", async (req, res) => {
     let sql =
       "INSERT INTO volunteers (firstname, lastname, email, " +
       " phone, locationID, weekendAvailability, weekdayAvailability," +
-      " otherAvailability, classAvailability, otherSkills)" +
-      " VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING id";
+      " otherAvailability, classAvailability, otherSkills, submissionDate)" +
+      " VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, current_timestamp) RETURNING id";
     await db.query(
       sql,
       [fn, ls, em, ph, lo, wa, wda, oa, ca, os],
@@ -129,7 +129,11 @@ app.post("/volunteers", async (req, res) => {
           let sql2 =
             "INSERT INTO skillLevels (volunteerID, skillID, skillLevel)" +
             " VALUES ($1, $2, $3)";
-          db.query(sql2, [newID, sl1.skillId, sl1.skillLevel]);
+          console.log(sl1);
+          for (skill in sl1) {
+            console.log("state of skill: " + sl1[skill]);
+            db.query(sql2, [newID, sl1[skill].skillId, sl1[skill].skillLevel]);
+          }
           res.status(200).json({
             id: newID
           });
