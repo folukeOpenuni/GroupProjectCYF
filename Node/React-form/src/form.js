@@ -78,13 +78,15 @@ class Form extends Component {
       otherAvailability: this.state.otherAvailability ? "NO" : "YES",
       classAvailability: this.state.classAvailability ? "NO" : "YES",
       otherSkills: this.state.otherSkills,
-      skillLevel: this.state.skill1,
-      skill2: this.state.skill2,
-      skill3: this.state.skill3,
-      skill4: this.state.skill4,
-      skill5: this.state.skill5
+      skillLevel: {
+        skill1: this.state.skill1,
+        skill2: this.state.skill2,
+        skill3: this.state.skill3,
+        skill4: this.state.skill4,
+        skill5: this.state.skill5
+      }
     };
-
+    console.log(volunteer);
     axios
       .post("http://localhost:8000/volunteers", { ...volunteer })
       .then(result => {
@@ -161,7 +163,7 @@ class Form extends Component {
     this.setState({
       skill5: {
         skillId: 5,
-        skillValue: event.currentTarget.getAttribute("aria-posinset")
+        skillLevel: event.currentTarget.getAttribute("aria-posinset")
       }
     });
   };
