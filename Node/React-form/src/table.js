@@ -1,6 +1,5 @@
 import React from "react";
 import axios from "axios";
-import updateSkillState from "./form";
 import { Header, Table, Rating } from "semantic-ui-react";
 
 const skillID = 1;
@@ -164,4 +163,25 @@ class TableExamplePadded extends React.Component {
     );
   }
 }
+
+const result = {
+  skillID: 1,
+  skillLevel: 3
+};
+
+const skills = {
+  result1: {
+    skillID: 1,
+    skillLevel: 3
+  },
+  result2: {
+    skillID: 2,
+    skillLevel: 3
+  },
+  result3: {
+    skillID: 3,
+    skillLevel: 3
+  }
+};
+
 export default TableExamplePadded;

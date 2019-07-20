@@ -5,6 +5,7 @@ import CheckboxExampleShorthandElement from "./checkbox";
 import DropdownExampleMultipleSelection from "./dropdown";
 import TableExamplePadded from "./table";
 import { Checkbox } from "semantic-ui-react";
+import { checkServerIdentity } from "tls";
 
 class Form extends Component {
   constructor(props) {
@@ -28,7 +29,9 @@ class Form extends Component {
       skill2: {},
       skill3: {},
       skill4: {},
-      skill5: {}
+      skill5: {},
+      showTable: false,
+      showDropdown: true
     };
     // This binding is necessary to make `this` work in the callback
     this.handleChange = this.handleChange.bind(this);
@@ -188,6 +191,21 @@ class Form extends Component {
     }));
   }
 
+  toggleTable = () => {
+    this.setState({ showTable: !this.state.showTable });
+  };
+
+  handleInputChange = event => {
+    const target = event.target;
+
+    const value = target.type === "checkbox" ? target.checked : target.value;
+    const name = target.name;
+
+    this.setState({
+      [name]: value
+    });
+  };
+
   render() {
     return (
       <form onSubmit={this.handleSubmit}>
@@ -222,7 +240,7 @@ class Form extends Component {
               <h4>Which CYF city would you like to volunteer for? </h4>
             </label>
           </div>
-
+          <DropdownExampleMultipleSelection name="" />
           <div>
             <small id="cityHelp" class="form-text text-muted">
               If you're interested in bringing CYF to your city email us at
@@ -281,19 +299,29 @@ class Form extends Component {
             name=""
           />
           <CheckboxExampleShorthandElement label="Running and growing the organisation" />
+          <input
+            name="isGoing"
+            type="checkbox"
+            checked={this.state.showTable}
+            onChange={this.toggleTable}
+          />
           <div>
             <label for="interest" required>
               <h3>What is your level of expertise in the following areas?</h3>
             </label>
           </div>
           {/* <TableExamplePadded handleSkill={this.onClick} /> */}
-          <TableExamplePadded
-            updateSkill2={this.updateSkill2}
-            updateSkill1={this.updateSkill1}
-            updateSkill3={this.updateSkill3}
-            updateSkill4={this.updateSkill4}
-            updateSkill5={this.updateSkill5}
-          />
+          <button onClick={this.toggleTable}>Toggle Table</button>
+
+          {this.state.showTable && (
+            <TableExamplePadded
+              updateSkill2={this.updateSkill2}
+              updateSkill1={this.updateSkill1}
+              updateSkill3={this.updateSkill3}
+              updateSkill4={this.updateSkill4}
+              updateSkill5={this.updateSkill5}
+            />
+          )}
           {console.log(this.state)}
           <div>
             <label for="exampleInputSkill">
@@ -328,7 +356,9 @@ class Form extends Component {
               <h4>In which of these areas could you see yourself helping?</h4>
             </label>
           </div>
-          <DropdownExampleMultipleSelection name="" />
+          {this.state.showDropdown && (
+            <DropdownExampleMultipleSelection name="" />
+          )}
         </div>
         <div>
           <div>

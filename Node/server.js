@@ -67,14 +67,30 @@ app.get("/status", (request, response) => {
   });
 });
 
-app.get("/skill", (request, response) => {
-  db.query("SELECT id, skillName FROM skills LIMIT 5", (error, result) => {
-    if (error) {
-      throw error;
-    } else {
-      response.status(200).json({ skills: result.rows });
+app.get("/teachable", (request, response) => {
+  db.query(
+    "SELECT id, skillName FROM skills WHERE teachable='Y'",
+    (error, result) => {
+      if (error) {
+        throw error;
+      } else {
+        response.status(200).json({ skills: result.rows });
+      }
     }
-  });
+  );
+});
+
+app.get("/nonteachable", (request, response) => {
+  db.query(
+    "SELECT id, skillName FROM skills WHERE teachable IS null",
+    (error, result) => {
+      if (error) {
+        throw error;
+      } else {
+        response.status(200).json({ skills: result.rows });
+      }
+    }
+  );
 });
 
 app.post("/volunteersExample", (request, response) => {
